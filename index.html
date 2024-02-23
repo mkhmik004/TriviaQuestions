@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+
+    <script>
+        // Function to check answers for multiple-choice questions
+        function checkMCQ(selectedOption, correctAnswer) {
+            const buttons = document.querySelectorAll('.mcq-button');
+            const messageElement = document.getElementById('mcq-message');
+            buttons.forEach(button => {
+                if (button.innerText === selectedOption) {
+                    if (selectedOption === correctAnswer) {
+                        button.classList.add('correct');
+                        messageElement.innerText = 'Correct!';
+                        messageElement.style.color = 'green';
+                    } else {
+                        button.classList.add('incorrect');
+                        messageElement.innerText = 'Incorrect. Try again!';
+                        messageElement.style.color = 'red';
+                    }
+                } else {
+                    button.disabled = true; // Disable other buttons
+                }
+            });
+        }
+
+        // Function to check answers for free response questions
+        function checkFreeResponse() {
+            const inputElement = document.querySelector('.free-response-input');
+            const messageElement = document.getElementById('free-response-message');
+            const correctAnswer = 'DEMON SLAYER';
+
+            if (inputElement.value.toUpperCase() === correctAnswer) {
+                messageElement.innerText = 'Correct!';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.innerText = 'Incorrect. Try again!';
+                messageElement.style.color = 'red';
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="header">
+    <h1>Trivia!</h1>
+</div>
+
+<div class="container">
+    <div class="section">
+        <h2>Part 1: Multiple Choice </h2>
+        <hr>
+        <!-- Multiple choice question -->
+        <h3>What is the best Anime among the big three?</h3>
+        <button class="mcq-button" onclick="checkMCQ('One Piece', 'Naruto')">One Piece</button>
+        <button class="mcq-button" onclick="checkMCQ('Naruto', 'Naruto')">Naruto</button>
+        <button class="mcq-button" onclick="checkMCQ('JJK', 'Naruto')">JJK</button>
+        <button class="mcq-button" onclick="checkMCQ('Demon Slayer', 'Naruto')">Demon Slayer</button>
+        <div id="mcq-message"></div>
+    </div>
+
+    <div class="section">
+        <h2>Part 2: Free Response</h2>
+        <hr>
+        <!-- Free response question -->
+        <h3>What new Gen anime is the best in the following list?</h3>
+        <ul>
+            <li>JJK</li>
+            <li>Demon Slayer</li>
+            <li>Boruto</li>
+            <li>Undead Unluck</li>
+        </ul>
+        <input class="free-response-input" type="text">
+        <button onclick="checkFreeResponse()">Check Answer</button>
+        <div id="free-response-message"></div>
+    </div>
+</div>
+</body>
+</html>
+
+
